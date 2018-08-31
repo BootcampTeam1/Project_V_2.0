@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="budgetApp/public/styles/styles.css"> -->
+    <link href="../css/form.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<title>Login/SignUp</title>
+
+
+</head>
+<body>
+    <div class="row">
+        <div class="col-lg-4">
+            <h1><i class="fa fa-bank"></i>Budgeter</h1>
+        </div>
+    </div>
+
+<div class="container">
+    <div class="row-fluid">
+
+        <div class="span12">
+             <div class="span6">
+                <div class="area">
+                    <form id="loginForm" class="form-horizontal">
+                        <div class="heading">
+                            <h4 class="form-heading">Sign In</h4>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label" for="inputUsername">Email</label>
+
+                            <div class="controls">
+                                <input id="inputUsername" placeholder="E.g. john@doe.com" type="text">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label" for="inputPassword">Password</label>
+
+                            <div class="controls">
+                                <input id="inputPassword" placeholder="Min. 8 Characters" type="password">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <div class="controls">
+                                <label class="checkbox">
+                                    <input type="checkbox">Keep me signed in
+                                    <a class="btn btn-link" href="#">Forgot my password</a>
+                                </label>
+                                <br>
+                                <button class="btn btn-primary" type="submit">Sign In</button>
+                            </div>
+                        </div>
+												<br /><br />
+												<h6>Dont have an account?</h6>
+												<a href="/"><button class="btn btn-primary" type="button">Sign Up</button></a>
+                        <div class="alert alert-info">
+                            <button class="close" data-dismiss="alert" type="button">×</button>
+                            <strong>Access Denied!</strong>
+                            Please provide valid authorization.
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="../js/login.js"></script>
+</body>
+</html>

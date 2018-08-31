@@ -1,0 +1,70 @@
+body{
+    /* background:url("http://apopka-1x1yusplq.stackpathdns.com/wp-content/uploads/2018/07/EU-Budget.jpg"); */
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    /* opacity: 0.5; */
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+
+
+}
+.row {
+    font-family: 'Lobster', cursive;
+    background-color: lightblue;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    position: relative;
+}
+
+h1 i{
+    margin-left: 20px;
+}
+
+.heading h4{
+    font-family: 'Lobster', cursive;
+}
+
+.control-group label{
+    font-family: 'Lobster', cursive;
+
+}
+
+.container{
+
+    z-index: 99 !important;
+    width: 400px;
+    margin-left: -200px;
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    height: 200px;
+    margin-top: -100px /* half of you height */
+
+
+}
+
+.controls #inputUsername {
+    width: 90%
+}
+
+.controls #inputPassword {
+    width: 90%
+}
+
+.checkbox input{
+    margin-left: 0;
+    padding: 0;
+
+}
+
+
+
+
+button {
+    font-family: 'Lobster', cursive;
+
+}
