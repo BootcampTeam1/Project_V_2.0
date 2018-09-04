@@ -25,7 +25,7 @@ router.get("/login", (req, res) => {
 // GET "/members" - authenticated route - logged in users only
 // add this middleware for any route that shouldnt be accessible to public
 router.get("/members", isAuthenticated, (req, res) => {
-  res.sendFile(path.join(__dirname, "../views/members.html"));
+  res.sendFile(path.join(__dirname, "../views/index.html"));
 });
 
 module.exports = router;

@@ -29,46 +29,31 @@
         <div class="span12">
              <div class="span6">
                 <div class="area">
-                    <form id="loginForm" class="form-horizontal">
-                        <div class="heading">
-                            <h4 class="form-heading">Sign In</h4>
-                        </div>
 
-                        <div class="control-group">
-                            <label class="control-label" for="inputUsername">Email</label>
+									<!-- form starts -->
+											<h2>Login Form</h2>
 
-                            <div class="controls">
-                                <input id="inputUsername" placeholder="E.g. john@doe.com" type="text">
-                            </div>
-                        </div>
+											<form id="loginForm" class="loginForm" action="/api/login" method="post">
+												<div class="form-group">
+													<label for="exampleInputEmail1">Email address</label>
+													<input type="email" class="form-control" id="inputUsername" placeholder="Email">
+												</div>
+												<div class="form-group">
+													<label for="exampleInputPassword1">Password</label>
+													<input type="password" class="form-control" id="inputPassword" placeholder="Password">
+												</div>
+												<button type="submit" class="btn btn-default">Login</button>
+											</form>
+								<!-- form ends -->
 
-                        <div class="control-group">
-                            <label class="control-label" for="inputPassword">Password</label>
-
-                            <div class="controls">
-                                <input id="inputPassword" placeholder="Min. 8 Characters" type="password">
-                            </div>
-                        </div>
-
-                        <div class="control-group">
-                            <div class="controls">
-                                <label class="checkbox">
-                                    <input type="checkbox">Keep me signed in
-                                    <a class="btn btn-link" href="#">Forgot my password</a>
-                                </label>
-                                <br>
-                                <button class="btn btn-primary" type="submit">Sign In</button>
-                            </div>
-                        </div>
-												<br /><br />
-												<h6>Dont have an account?</h6>
-												<a href="/"><button class="btn btn-primary" type="button">Sign Up</button></a>
-                        <div class="alert alert-info">
-                            <button class="close" data-dismiss="alert" type="button">×</button>
-                            <strong>Access Denied!</strong>
-                            Please provide valid authorization.
-                        </div>
-                    </form>
+									<br /><br />
+									<h6>Dont have an account?</h6>
+									<a href="/"><button class="btn btn-primary" type="button">Sign Up</button></a>
+									<div class="alert alert-info">
+											<button class="close" data-dismiss="alert" type="button">×</button>
+											<strong>Access Denied!</strong>
+											Please provide valid authorization.
+									</div>
                 </div>
             </div>
         </div>
