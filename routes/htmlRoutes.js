@@ -28,4 +28,8 @@ router.get("/members", isAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname, "../views/index.html"));
 });
 
+router.get("/members/category", isAuthenticated, (req, res) => {
+  res.sendFile(path.join(__dirname, "../views/category.html"));
+});
+
 module.exports = router;

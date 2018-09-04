@@ -1,40 +1,33 @@
-$(document).ready(function() {
-  // Getting references to our form and input
-  var signUpForm = $("form.signup");
-  var emailInput = $("input#inputEmail");
-  var passwordInput = $("input#inputPassword");
+document.addEventListener('DOMContentLoaded', () => {
+  let form = document.querySelector("form");
+  let email = document.getElementById("inputEmail");
+  let password = document.getElementById("inputPassword");
 
-  // When the signup button is clicked, we validate the email and password are not blank
-  signUpForm.on("submit", function(event) {
-    event.preventDefault();
-    var userData = {
-      email: emailInput.val().trim(),
-      password: passwordInput.val().trim()
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    let data = {
+      email: email.value,
+      password: password.value
     };
 
-    if (!userData.email || !userData.password) {
-      return;
-    }
-    // If we have an email and password, run the signUpUser function
-    signUpUser(userData.email, userData.password);
-    emailInput.val("");
-    passwordInput.val("");
+    console.log(data);
+
+    fetch(`/api/signup`, {
+        method: "POST",
+        headers: {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        window.location.replace(data);
+      })
+      .catch(err => console.log(err));
   });
-
-  // Does a post to the signup route. If succesful, we are redirected to the members page
-  // Otherwise we log any errors
-  function signUpUser(email, password) {
-    $.post("/api/signup", {
-      email: email,
-      password: password
-    }).then(function(data) {
-      window.location.replace(data);
-      // If there's an error, handle it by throwing up a boostrap alert
-    }).catch(handleLoginErr);
-  }
-
-  function handleLoginErr(err) {
-    $("#alert .msg").text(err.responseJSON);
-    $("#alert").fadeIn(500);
-  }
 });
