@@ -1,107 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <title>Budgeter</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="../css/styles.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
+    <!-- <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    
+</head>
 <body>
+
     <div id="container">
+            <div class="left">
+                    <div class="item">
+                        <i class="fas fa-fw fa-bars"></i>
+                    </div>
+                    <!-- home route to category page -->
+                    <div class="item active">
+                        <i class="fas fa-home"></i> Home
+                    </div>
+                    <!-- chart route to chart page -->
+                    <div class="item">
+                        <i class="fas fa-chart-pie"></i> Chart 
+                    </div>
+                    <!-- logout route to landing page -->
+                    <div class="item">
+                        <i class="fas fa-fw fa-user-circle"></i> Logout
+                    </div>
+                </div>
         <div class="row">
-            <div class="col-sm-4" id="titleView">
+             <div class="col-sm-4" id="titleView">
                 <h1><i class="fa fa-bank"></i> Budgeter</h1>
             </div>
-            <div class="col-sm-4" id="expenseView">
-                <h1>Categories</h1>
-            </div>
-            <div class="col-sm-4" id="categoryView">
-                <h1><a href="/members">Chart View</h1></a>
-            </div>
-        </div>
 
+        </div>
         <div class="row2">
             <div class="col-md" style="text-align:center; padding-top: 2%;">
                 <h3><strong>August, 2018</strong></h3>
-                <h2><strong>$3,515</strong></h2>
+                <!-- need to be updated based on category -->
+                <h2 id="sum">$3,515</h2>
                 <div class="accordion" id="accordionView">
-                    <div class="card">
-                        <div class="card-header" id="headingOne">
+                    <div class="card" id="card0">
+                        <div class="card-header" id="heading1">
                             <h5 class="mb-0">
-                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    <i class="fa fa-building"></i> Rent
+                                <button id="category-button" class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                     Rent
                                 </button>
                             </h5>
                         </div>
-                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionView">
-                            <div class="card-body">
+                        <div id="number" class="card-body">
                                 $1,250
-                            </div>
                         </div>
                     </div>
-                    <div class="card">
-                        <div class="card-header" id="headingTwo">
-                            <h5 class="mb-0">
-                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    <i class="fa fa-bolt"></i> Utilities
-                                </button>
-                            </h5>
-                        </div>
-                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionView">
-                            <div class="card-body">
-                                $300
-                            </div>
-                        </div>
                     </div>
-                    <div class="card">
-                        <div class="card-header" id="headingThree">
-                            <h5 class="mb-0">
-                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                    <i class="fa fa-shopping-basket"></i> Food/Groceries
-                                </button>
-                            </h5>
-                        </div>
-                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionView">
-                            <div class="card-body">
-                                $865
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header" id="headingFour">
-                            <h5 class="mb-0">
-                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                    <i class="fa fa-ticket"></i> Entertainment
-                                </button>
-                            </h5>
-                        </div>
-                        <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionView">
-                            <div class="card-body">
-                                $670
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header" id="headingFive">
-                            <h5 class="mb-0">
-                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                    <i class="fa fa-heartbeat"></i> Insurance/Medical
-                                </button>
-                            </h5>
-                        </div>
-                        <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionView">
-                            <div class="card-body">
-                                $430
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
+
+                    
+                
+                <div class="card" id="main">
                         <div class="card-header" id="headingSix">
                             <h5 class="mb-0">
                                 <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
@@ -111,50 +71,118 @@
                         </div>
                         <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionView">
                             <div class="card-body">
-                                <input type="text" id="category" class="form-control" required placeholder="category">
-                                <input type="text" id="monthly-goal" class="form-control" required placeholder="monthly goal">
-                                <input type="text" id="amount-spent" class="form-control" required placeholder="amount spent">
+                                <h4>Name</h4>
+                                <!-- <input type="text" class="form-control" required> -->
+                                <select id="add-category" name="sel0">
+                                        <option value"">Select Category</option>
+                                        <option value"1">Utilities</option>
+                                        <option value"2">Food</option>
+                                        <option value"3">Entertainment</option>
+                                        <option value"4">Medical/Insurance</option>
+                                        <option value"5">Travel</option>
+                                        <option value"6">Transportation</option>
+                                        <option value"7">Clothes</option>
+                                        <option value"8">Education</option>
+                                        <option value"9">Children</option>
+                                        <option value"10">Pet</option>
+                                        <option value"11">Self-caring</option>
+                                        <option value"12">Rent</option>
 
+                                </select>
+                            
                                 <br>
-                                <button type="submit" id="add">Add</button>
+                                <h4>Amount</h4>
+                                <input type="number" id="add-number" class="form-control" required>
+                                <br>
+                                <button type="submit" id="add">Add</button> 
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                    
+            
         </div>
     </div>
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+    //initial array of category 
+    // "Utilities", "Food/Groceries", "Entertainment", "Insurance/Medical"
+    // var categories = ["Utilities", "Food", "Entertainment", "Medical/Insurance", "Travel", "Transportation", "Clothes", "Education", "Children", "Pet", "Self-Caring"]; 
+    var categories = []; 
+    var amounts = [];
+    // var cardCounter =1; 
+    //functions for displaying category data
+    function renderButtons() {
 
-    <script>
+        var newCard = $("#card0").clone();
+        $("#accordionView").empty(); 
+        //category name is empty
+        // $("#heading1").empty(); 
+        // $("#number").empty(); 
+        
+        //amount for each category should be empty 
+        // $("#collapseOne").empty(); 
+        // looping through the array of category
+        var sum = 0; 
+        for(var i=0; i<categories.length; i++) {
+            // cardCounter++;
+            
+            
+    
+            //then dynamically generating button 
+            newCard = newCard.clone();
+            // newCard.addClass("card"); 
+            
+            
+            newCard.attr("id", "card" + i);
+            
+            var a = $("<h5>");
+            //adding card class
+            a.addClass("mb-0");
+            //adding a data-attribute with a value of the category at index i
+            a.attr("data-name", categories[i]);
+            //providing the card text with a value of the category at index i
+            a.text(categories[i]);
+            //adding the card to the html
+            newCard.find(".card-header").text(categories[i]); 
+            //adding number to html
+            newCard.find(".card-body").text(amounts[i]);
+            sum += amounts[i];
+            
+            // newCard.append(a);
+            $("#accordionView").prepend(newCard);
 
-    $(document).ready(function() {
-        var userId;
-
-        $.get("/api/user_data").then(function(data) {
-            userId = data.id;
-        });
-
-        $("#add").on("click", function () {
-
-            var newBudget = {
-                name: $("#category").val().trim(),
-                amount_spent: $("#amount-spent").val().trim(),
-                monthly_goal: $("#monthly-goal").val().trim(),
-                UserId: userId
-            };
+             
+             
+        
+        }
+        $("#sum").text("$" + sum); 
 
 
-            $.post("/api/budgets", newBudget)
-            .then(() => {
-             console.log("added new budget");
-            });
-        });
+
+    }; 
+    //this function handles events where one button is cliked 
+    $("#add").on("click", function(event) {
+        //event.preventDefault() prevents the form from trying to submit itself 
+        event.preventDefault(); 
+        //this line will grab the text from the input textbox 
+        var category = $("#add-category").val().trim();
+        //the cateogy from the textbox is then added to our catagories array 
+        categories.push(category); 
+        //calling renderCards which handles the processing categories 
+        var amount = Number($("#add-number").val().trim()); 
+        amounts.push(amount); 
+        renderButtons(); 
     });
 
+    if (categories.length>0) {
+        renderButtons();
+
+    }; 
+     
+    
     </script>
-
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
 </body>
-
 </html>
