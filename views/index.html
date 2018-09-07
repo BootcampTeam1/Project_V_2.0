@@ -47,63 +47,7 @@
         </div>
     </div>
 
-    <script>
-
-        new Chart(document.getElementById("budget-chart"), {
-            type: 'doughnut',
-            data: {
-                labels: ["Rent: $1,250", "Utilities: $300", "Food/Groceries: $865", "Entertainment: $670", "Insurance/Medical: $430"],
-                datasets: [
-                    {
-                        label: "Budget (Dollars)",
-                        backgroundColor: ["#0000ff", "#ee82ee", "#3cba9f", "#e8c3b9", "#c45850",
-                        "#00bfff", "#b22222", "#228b22", "#d2691e", "#4b0082", "#ffd700"],
-                        data: [1250, 300, 865, 670, 430,
-                        400, 400, 400, 400, 400, 400]
-                    }
-                ],
-            },
-            options: {
-                response: true,
-                title: {
-                    text: "Expenses",
-                    display: true,
-                    fontSize: 26,
-                    fontFamily: "Lobster",
-                    fontColor: "black",
-                    padding: 30
-                },
-                legend: {
-                    display: true,
-                    position: "bottom",
-                    labels: {
-                        fontSize: 16,
-                        boxWidth: 20,
-                        fontFamily: "Lobster",
-                        fontColor: "black",
-                        padding: 25
-                    }
-                },
-                tooltips: {
-                    callbacks: {
-                        // function converting expenses into percentages/month.
-                        label: function (tooltipItem, data) {
-                            var dataset = data.datasets[tooltipItem.datasetIndex];
-                            var meta = dataset._meta[Object.keys(dataset._meta)[0]];
-                            var total = meta.total;
-                            var currentValue = dataset.data[tooltipItem.index];
-                            var percentage = parseFloat((currentValue / total * 100).toFixed(1));
-                            return ' (' + percentage + '%)';
-                        },
-                        title: function (tooltipItem, data) {
-                            return data.labels[tooltipItem[0].index];
-                        }
-                    }
-                },
-            }
-        });
-    </script>
-
 </body>
+<script src="../js/index.js"></script>
 
 </html>

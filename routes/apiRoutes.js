@@ -57,11 +57,14 @@ router.get("/logout", (req, res) => {
 // For testing purposes, remove the 2nd param "isAuthenticated"
 // --------------------------------------------------------------------------
 // GET route for getting all of the total budget
-router.get("/api/budgets", isAuthenticated, (req, res) => {
+router.get("/api/budgets/user/:userId", isAuthenticated, (req, res) => {
   db.Budget.findAll({
     where: {
-      id: req.user.id
+      UserId: req.params.userId 
     }
+  }) 
+  .then(function(dbBudget) {
+    res.json(dbBudget);
   });
 });
 

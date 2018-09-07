@@ -111,7 +111,10 @@
                         </div>
                         <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionView">
                             <div class="card-body">
-                                <input type="text" id="category" class="form-control" required>
+                                <input type="text" id="category" class="form-control" required placeholder="category">
+                                <input type="text" id="monthly-goal" class="form-control" required placeholder="monthly goal">
+                                <input type="text" id="amount-spent" class="form-control" required placeholder="amount spent">
+                                
                                 <br>
                                 <button type="submit" id="add">Add</button>
                             </div>
@@ -125,10 +128,28 @@
     <script>
 
     $(document).ready(function() {
-        $("#category").submit(function() {
-            $("#add").append("#accordionView");
-        })
-    })
+        var userId;
+        
+        $.get("/api/user_data").then(function(data) {
+            userId = data.id;
+        });
+
+        $("#add").on("click", function () {
+            
+            var newBudget = {
+                name: $("#category").val().trim(),
+                amount_spent: $("#amount-spent").val().trim(),
+                monthly_goal: $("#monthly-goal").val().trim(),
+                UserId: userId
+            };
+            
+
+            $.post("/api/budgets", newBudget)
+            .then(() => {
+             console.log("added new budget");   
+            });
+        });
+    });
 
     </script>
 

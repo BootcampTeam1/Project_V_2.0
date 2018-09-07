@@ -1,100 +1,80 @@
 
-// Get references to page elements
-var $exampleText = $("#example-text");
-var $exampleDescription = $("#example-description");
-var $submitBtn = $("#submit");
-var $exampleList = $("#example-list");
 
-// The API object contains methods for each kind of request we'll make
-var API = {
-  saveExample: function(example) {
-    return $.ajax({
-      headers: {
-        "Content-Type": "application/json"
+$.get("/api/user_data").then(function(data) {
+   console.log(data.id);
+   getBudgets(data.id);
+});
+
+var categories = [];
+var categoryValue = [];
+
+function getBudgets(userID) {
+  var userString = userID || "";
+   if (userString) {
+    userString = "/user/" + userString;
+  }
+  $.get("/api/budgets" + userString, function(data) {
+    // console.log("Budgets", data);
+    for (var i = 0; i < data.length; i++){
+      categories.push(data[i].name + ": $" + data[i].amount_spent);
+      categoryValue.push(data[i].amount_spent);
+    }
+  }).then(() => {
+    renderChart();
+  })
+}
+
+function renderChart () {
+    new Chart(document.getElementById("budget-chart"), {
+      type: 'doughnut',
+      data: {
+          labels: categories,
+          datasets: [
+              {
+                  label: "Budget (Dollars)",
+                  backgroundColor: ["#0000ff", "#ee82ee", "#3cba9f", "#e8c3b9", "#c45850",
+                  "#00bfff", "#b22222", "#228b22", "#d2691e", "#4b0082", "#ffd700"],
+                  data: categoryValue
+              }
+          ],
       },
-      type: "POST",
-      url: "api/examples",
-      data: JSON.stringify(example)
-    });
-  },
-  getExamples: function() {
-    return $.ajax({
-      url: "api/examples",
-      type: "GET"
-    });
-  },
-  deleteExample: function(id) {
-    return $.ajax({
-      url: "api/examples/" + id,
-      type: "DELETE"
+      options: {
+          response: true,
+          title: {
+              text: "Expenses",
+              display: true,
+              fontSize: 26,
+              fontFamily: "Lobster",
+              fontColor: "black",
+              padding: 30
+          },
+          legend: {
+              display: true,
+              position: "bottom",
+              labels: {
+                  fontSize: 16,
+                  boxWidth: 20,
+                  fontFamily: "Lobster",
+                  fontColor: "black",
+                  padding: 25
+              }
+          },
+          tooltips: {
+              callbacks: {
+                  // function converting expenses into percentages/month.
+                  label: function (tooltipItem, data) {
+                      var dataset = data.datasets[tooltipItem.datasetIndex];
+                      var meta = dataset._meta[Object.keys(dataset._meta)[0]];
+                      var total = meta.total;
+                      var currentValue = dataset.data[tooltipItem.index];
+                      var percentage = parseFloat((currentValue / total * 100).toFixed(1));
+                      return ' (' + percentage + '%)';
+                  },
+                  title: function (tooltipItem, data) {
+                      return data.labels[tooltipItem[0].index];
+                  }
+              }
+          },
+      }
     });
   }
-};
-
-// refreshExamples gets new examples from the db and repopulates the list
-var refreshExamples = function() {
-  API.getExamples().then(function(data) {
-    var $examples = data.map(function(example) {
-      var $a = $("<a>")
-        .text(example.text)
-        .attr("href", "/example/" + example.id);
-
-      var $li = $("<li>")
-        .attr({
-          class: "list-group-item",
-          "data-id": example.id
-        })
-        .append($a);
-
-      var $button = $("<button>")
-        .addClass("btn btn-danger float-right delete")
-        .text("ｘ");
-
-      $li.append($button);
-
-      return $li;
-    });
-
-    $exampleList.empty();
-    $exampleList.append($examples);
-  });
-};
-
-// handleFormSubmit is called whenever we submit a new example
-// Save the new example to the db and refresh the list
-var handleFormSubmit = function(event) {
-  event.preventDefault();
-
-  var example = {
-    text: $exampleText.val().trim(),
-    description: $exampleDescription.val().trim()
-  };
-
-  if (!(example.text && example.description)) {
-    alert("You must enter an example text and description!");
-    return;
-  }
-
-  API.saveExample(example).then(function() {
-    refreshExamples();
-  });
-
-  $exampleText.val("");
-  $exampleDescription.val("");
-};
-
-// handleDeleteBtnClick is called when an example's delete button is clicked
-// Remove the example from the db and refresh the list
-var handleDeleteBtnClick = function() {
-  var idToDelete = $(this)
-    .parent()
-    .attr("data-id");
-
-  API.deleteExample(idToDelete).then(function() {
-    refreshExamples();
-  });
-};
-
-// Add event listeners to the submit and delete buttons
-$submitBtn.on("click", handleFormSubmit);
-$exampleList.on("click", ".delete", handleDeleteBtnClick);
