@@ -6,8 +6,13 @@ const isAuthenticated = require("../config/middleware/isAuthenticated");
 
 // Routes --------------------------------------------------------
 
-// GET "/" - If the user already has an account send them to the members page
+// GET - "/" Landing page route
 router.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../views/landing.html"));
+});
+
+// GET "/signup" - If the user already has an account send them to the members page
+router.get("/signup", (req, res) => {
   if (req.user) {
     res.redirect("/members");
   }
