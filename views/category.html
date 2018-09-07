@@ -22,7 +22,7 @@
                 <h1>Categories</h1>
             </div>
             <div class="col-sm-4" id="categoryView">
-                <h1><a href="index.html">Chart View</h1></a>
+                <h1><a href="/members">Chart View</h1></a>
             </div>
         </div>
 
@@ -114,7 +114,7 @@
                                 <input type="text" id="category" class="form-control" required placeholder="category">
                                 <input type="text" id="monthly-goal" class="form-control" required placeholder="monthly goal">
                                 <input type="text" id="amount-spent" class="form-control" required placeholder="amount spent">
-                                
+
                                 <br>
                                 <button type="submit" id="add">Add</button>
                             </div>
@@ -129,24 +129,24 @@
 
     $(document).ready(function() {
         var userId;
-        
+
         $.get("/api/user_data").then(function(data) {
             userId = data.id;
         });
 
         $("#add").on("click", function () {
-            
+
             var newBudget = {
                 name: $("#category").val().trim(),
                 amount_spent: $("#amount-spent").val().trim(),
                 monthly_goal: $("#monthly-goal").val().trim(),
                 UserId: userId
             };
-            
+
 
             $.post("/api/budgets", newBudget)
             .then(() => {
-             console.log("added new budget");   
+             console.log("added new budget");
             });
         });
     });
