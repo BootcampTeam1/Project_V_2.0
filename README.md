@@ -8,6 +8,7 @@ Budgeter is deployed to Heroku. You can try the site out for yourself [here](htt
 - Javascript
 - HTML5
 - CSS3
+- Node.js
 - MySQL
 - Sequelize
 - Chart.js
