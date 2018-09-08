@@ -175,7 +175,7 @@ function getBudgets(userID) {
             //adding the card to the html
             newCard.find(".card-header").text(categories[i]); 
             //adding number to html
-            newCard.find(".card-body").text(amounts[i]);
+            newCard.find(".card-body").text("$" + amounts[i]);
             sum += parseInt(amounts[i]);
             
             // newCard.append(a);
