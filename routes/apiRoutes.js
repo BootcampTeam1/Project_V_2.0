@@ -87,13 +87,14 @@ router.delete("/api/budgets/:id", isAuthenticated, (req, res) => {
 });
 
 // PUT route for updating specific budgets by id
-router.put("/api/budgets/:id", isAuthenticated, (req, res) => {
+router.put("/api/budgets/:id/:name", isAuthenticated, (req, res) => {
   db.Budget.update(
     req.body,
     {
       where: {
-        id: req.body.id
-      }
+        UserId: req.params.id,
+        name: req.params.name
+            }
     }).then((dbBudget) => {
     res.json(dbBudget);
   });

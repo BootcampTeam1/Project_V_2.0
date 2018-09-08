@@ -7,9 +7,6 @@
     <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-
-    <!-- <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
     
 </head>
@@ -22,15 +19,21 @@
                     </div>
                     <!-- home route to category page -->
                     <div class="item active">
-                        <i class="fas fa-home"></i> Home
+                        <a href="/members/category" style="color:white; text-decoration: none;">
+                            <i class="fas fa-home"></i>Home
+                        </a>
                     </div>
                     <!-- chart route to chart page -->
                     <div class="item">
-                        <i class="fas fa-chart-pie"></i> Chart 
+                        <a href="/members" style="color:white; text-decoration: none;">
+                            <i class="fas fa-chart-pie"></i>Chart 
+                        </a>    
                     </div>
                     <!-- logout route to landing page -->
                     <div class="item">
-                        <i class="fas fa-fw fa-user-circle"></i> Logout
+                        <a href="/" style="color:white; text-decoration: none;">
+                            <i class="fas fa-fw fa-user-circle"></i>Logout
+                        </a> 
                     </div>
                 </div>
         <div class="row">
@@ -41,7 +44,7 @@
         </div>
         <div class="row2">
             <div class="col-md" style="text-align:center; padding-top: 2%;">
-                <h3><strong>August, 2018</strong></h3>
+                <h3><strong>September, 2018</strong></h3>
                 <!-- need to be updated based on category -->
                 <h2 id="sum">$3,515</h2>
                 <div class="accordion" id="accordionView">
@@ -65,7 +68,7 @@
                         <div class="card-header" id="headingSix">
                             <h5 class="mb-0">
                                 <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                                    <i class="fa fa-plus"></i> Add a Category
+                                    <i class="fa fa-plus"></i> Add
                                 </button>
                             </h5>
                         </div>
@@ -102,17 +105,41 @@
             
         </div>
     </div>
-    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
     <script type="text/javascript">
     //initial array of category 
     // "Utilities", "Food/Groceries", "Entertainment", "Insurance/Medical"
     // var categories = ["Utilities", "Food", "Entertainment", "Medical/Insurance", "Travel", "Transportation", "Clothes", "Education", "Children", "Pet", "Self-Caring"]; 
-    var categories = []; 
-    var amounts = [];
+    
     // var cardCounter =1; 
+$.get("/api/user_data").then(function(data) {
+    id = data.id
+    getBudgets(id);
+}); 
+
+var categories = []; 
+var amounts = [];
+var id = "";
+
+function getBudgets(userID) {
+    var userString = userID || "";
+    if (userString) {
+        userString = "/user/" + userString;
+    }
+    $.get("/api/budgets" + userString, function(data) {
+        console.log(data);
+        for (var i = 0; i < data.length; i++){
+        categories.push(data[i].name);
+        amounts.push(data[i].amount_spent);
+        }
+    }).then(() => {
+        renderButtons();
+    })
+}
+    
     //functions for displaying category data
     function renderButtons() {
 
@@ -149,7 +176,7 @@
             newCard.find(".card-header").text(categories[i]); 
             //adding number to html
             newCard.find(".card-body").text(amounts[i]);
-            sum += amounts[i];
+            sum += parseInt(amounts[i]);
             
             // newCard.append(a);
             $("#accordionView").prepend(newCard);
@@ -161,8 +188,9 @@
         $("#sum").text("$" + sum); 
 
 
+    };
+    
 
-    }; 
     //this function handles events where one button is cliked 
     $("#add").on("click", function(event) {
         //event.preventDefault() prevents the form from trying to submit itself 
@@ -170,19 +198,51 @@
         //this line will grab the text from the input textbox 
         var category = $("#add-category").val().trim();
         //the cateogy from the textbox is then added to our catagories array 
-        categories.push(category); 
+        // categories.push(category); 
         //calling renderCards which handles the processing categories 
         var amount = Number($("#add-number").val().trim()); 
-        amounts.push(amount); 
-        renderButtons(); 
+        // amounts.push(amount); 
+        function updateBudget(budget) {
+            $.ajax({
+            method: "PUT",
+            url: "/api/budgets/" + id + "/" + category,
+            data: budget
+            })
+            .then(function() {
+                location.reload();
+            });
+        }
+
+        if (categories.includes(category)) {
+            var currentAmount = amounts[categories.indexOf(category)];
+            var newAmount = parseInt(currentAmount) + parseInt(amount);
+            
+            var newAmountSpent = {
+                amount_spent: newAmount
+            }
+            
+            updateBudget(newAmountSpent);
+
+        } else {
+            var newBudget = {
+            UserId: id,
+            name: category,
+            amount_spent: amount
+            }
+
+            $.post("/api/budgets", newBudget)
+            .then(() => {
+                location.reload();
+            });
+        }
+        
     });
 
     if (categories.length>0) {
         renderButtons();
 
     }; 
-     
-    
+
     </script>
 </body>
 </html>
