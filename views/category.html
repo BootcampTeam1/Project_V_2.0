@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
-    
+
 </head>
 <body>
 
@@ -26,14 +26,14 @@
                     <!-- chart route to chart page -->
                     <div class="item">
                         <a href="/members" style="color:white; text-decoration: none;">
-                            <i class="fas fa-chart-pie"></i>Chart 
-                        </a>    
+                            <i class="fas fa-chart-pie"></i>Chart
+                        </a>
                     </div>
                     <!-- logout route to landing page -->
                     <div class="item">
-                        <a href="/" style="color:white; text-decoration: none;">
+                        <a href="/logout" style="color:white; text-decoration: none;">
                             <i class="fas fa-fw fa-user-circle"></i>Logout
-                        </a> 
+                        </a>
                     </div>
                 </div>
         <div class="row">
@@ -62,8 +62,8 @@
                     </div>
                     </div>
 
-                    
-                
+
+
                 <div class="card" id="main">
                         <div class="card-header" id="headingSix">
                             <h5 class="mb-0">
@@ -92,17 +92,17 @@
                                         <option value"12">Rent</option>
 
                                 </select>
-                            
+
                                 <br>
                                 <h4>Amount</h4>
                                 <input type="number" id="add-number" class="form-control" required>
                                 <br>
-                                <button type="submit" id="add">Add</button> 
+                                <button type="submit" id="add">Add</button>
                             </div>
                         </div>
                     </div>
-                    
-            
+
+
         </div>
     </div>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -110,17 +110,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
     <script type="text/javascript">
-    //initial array of category 
+    //initial array of category
     // "Utilities", "Food/Groceries", "Entertainment", "Insurance/Medical"
-    // var categories = ["Utilities", "Food", "Entertainment", "Medical/Insurance", "Travel", "Transportation", "Clothes", "Education", "Children", "Pet", "Self-Caring"]; 
-    
-    // var cardCounter =1; 
+    // var categories = ["Utilities", "Food", "Entertainment", "Medical/Insurance", "Travel", "Transportation", "Clothes", "Education", "Children", "Pet", "Self-Caring"];
+
+    // var cardCounter =1;
 $.get("/api/user_data").then(function(data) {
     id = data.id
     getBudgets(id);
-}); 
+});
 
-var categories = []; 
+var categories = [];
 var amounts = [];
 var id = "";
 
@@ -139,32 +139,32 @@ function getBudgets(userID) {
         renderButtons();
     })
 }
-    
+
     //functions for displaying category data
     function renderButtons() {
 
         var newCard = $("#card0").clone();
-        $("#accordionView").empty(); 
+        $("#accordionView").empty();
         //category name is empty
-        // $("#heading1").empty(); 
-        // $("#number").empty(); 
-        
-        //amount for each category should be empty 
-        // $("#collapseOne").empty(); 
+        // $("#heading1").empty();
+        // $("#number").empty();
+
+        //amount for each category should be empty
+        // $("#collapseOne").empty();
         // looping through the array of category
-        var sum = 0; 
+        var sum = 0;
         for(var i=0; i<categories.length; i++) {
             // cardCounter++;
-            
-            
-    
-            //then dynamically generating button 
+
+
+
+            //then dynamically generating button
             newCard = newCard.clone();
-            // newCard.addClass("card"); 
-            
-            
+            // newCard.addClass("card");
+
+
             newCard.attr("id", "card" + i);
-            
+
             var a = $("<h5>");
             //adding card class
             a.addClass("mb-0");
@@ -173,35 +173,35 @@ function getBudgets(userID) {
             //providing the card text with a value of the category at index i
             a.text(categories[i]);
             //adding the card to the html
-            newCard.find(".card-header").text(categories[i]); 
+            newCard.find(".card-header").text(categories[i]);
             //adding number to html
             newCard.find(".card-body").text(amounts[i]);
             sum += parseInt(amounts[i]);
-            
+
             // newCard.append(a);
             $("#accordionView").prepend(newCard);
 
-             
-             
-        
+
+
+
         }
-        $("#sum").text("$" + sum); 
+        $("#sum").text("$" + sum);
 
 
     };
-    
 
-    //this function handles events where one button is cliked 
+
+    //this function handles events where one button is cliked
     $("#add").on("click", function(event) {
-        //event.preventDefault() prevents the form from trying to submit itself 
-        event.preventDefault(); 
-        //this line will grab the text from the input textbox 
+        //event.preventDefault() prevents the form from trying to submit itself
+        event.preventDefault();
+        //this line will grab the text from the input textbox
         var category = $("#add-category").val().trim();
-        //the cateogy from the textbox is then added to our catagories array 
-        // categories.push(category); 
-        //calling renderCards which handles the processing categories 
-        var amount = Number($("#add-number").val().trim()); 
-        // amounts.push(amount); 
+        //the cateogy from the textbox is then added to our catagories array
+        // categories.push(category);
+        //calling renderCards which handles the processing categories
+        var amount = Number($("#add-number").val().trim());
+        // amounts.push(amount);
         function updateBudget(budget) {
             $.ajax({
             method: "PUT",
@@ -216,11 +216,11 @@ function getBudgets(userID) {
         if (categories.includes(category)) {
             var currentAmount = amounts[categories.indexOf(category)];
             var newAmount = parseInt(currentAmount) + parseInt(amount);
-            
+
             var newAmountSpent = {
                 amount_spent: newAmount
             }
-            
+
             updateBudget(newAmountSpent);
 
         } else {
@@ -235,13 +235,13 @@ function getBudgets(userID) {
                 location.reload();
             });
         }
-        
+
     });
 
     if (categories.length>0) {
         renderButtons();
 
-    }; 
+    };
 
     </script>
 </body>
