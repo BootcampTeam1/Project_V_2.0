@@ -18,6 +18,9 @@ Budgeter is deployed to Heroku. You can try the site out for yourself [here](htt
 - Passport
 - JawsDB
 - Express 
+- FontAwesome
+- Bootstrap
+- Heroku
 
 ## For Help
 Please contact one of our team members with any issues you may encounter while using our new application. 
