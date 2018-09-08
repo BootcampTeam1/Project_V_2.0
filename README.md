@@ -13,7 +13,7 @@ Budgeter is deployed to Heroku. You can try the site out for yourself [here](htt
 - Sequelize
 - Chart.js
 - AJAX
-- User Authentication
+- Passport
 - JawsDB
 - Express 
 
